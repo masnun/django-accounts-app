@@ -1,0 +1,52 @@
+{% extends "master.html" %}
+
+{% block body %}
+
+    <div class="row">
+        <div class="col-md-offset-1 col-md-10">
+            <a href="{% url 'accounts:account_list' %}" class="btn btn-default"><span
+                    class="glyphicon glyphicon-arrow-left"></span> Accounts </a> <br/><br/>
+
+            {% if transaction_list %}
+                <table class="table table-bordered">
+                    <thead>
+                    <tr>
+                        <th>Description</th>
+                        <th>Debit</th>
+                        <th>Credit</th>
+                        <th>Actions</th>
+                    </tr>
+                    </thead>
+
+                    <tbody>
+                    {% for transaction in transaction_list %}
+                        <tr>
+                            <td>
+                                {{ transaction.notes }}
+                            </td>
+                            <td>
+                                {{ transaction.debit }}
+                            </td>
+                            <td>
+                                {{ transaction.credit }}
+                            </td>
+                            <td>
+                                <a href="{% url 'accounts:transaction_delete' transaction.id %}" class="btn btn-danger"><span
+                                        class="glyphicon glyphicon-trash">&nbsp;</span>Delete</a>
+
+                            </td>
+
+
+                        </tr>
+                    {% endfor %}
+                    </tbody>
+                </table>
+            {% else %}
+                <span class="alert alert-danger">
+                    No transactions found for the account
+                </span>
+            {% endif %}
+        </div>
+    </div>
+
+{% endblock %}

@@ -1,0 +1,49 @@
+{% extends "master.html" %}
+
+{% block body %}
+
+    <div class="row">
+        <div class="col-md-offset-1 col-md-10">
+            <a href="{% url 'accounts:account_create' %}" class="btn btn-info"><span
+                    class="glyphicon glyphicon-plus"></span> New Account </a> <br/><br/>
+            <table class="table table-bordered">
+                <thead>
+                <tr>
+                    <th>Name</th>
+                    <th>Description</th>
+                    <th>Balance</th>
+                    <th style="width: 50%;">Actions</th>
+                </tr>
+                </thead>
+
+                <tbody>
+                {% for account in account_list %}
+                    <tr>
+                        <td>
+                            {{ account.name }}
+                        </td>
+                        <td>
+                            {{ account.description }}
+                        </td>
+                        <td>
+                            {{ account.balance }}
+                        </td>
+                        <td>
+                            <a href="{% url 'accounts:transaction_create' %}?account={{ account.id }}" class="btn btn-info"><span class="glyphicon glyphicon-download-alt">&nbsp;</span>Add Transaction</a>
+                            <a href="{% url 'accounts:transaction_list' %}?account={{ account.id }}" class="btn btn-success"><span class="glyphicon glyphicon-stats">&nbsp;</span>Transaction List</a>
+
+
+                            <a href="{% url "accounts:account_update" account.id %}" class="btn btn-warning"><span class="glyphicon glyphicon-pencil">&nbsp;</span>Edit</a>
+                            <a href="{% url "accounts:account_delete" account.id %}" class="btn btn-danger"><span class="glyphicon glyphicon-pencil">&nbsp;</span>Delete</a>
+
+                        </td>
+
+
+                    </tr>
+                {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+{% endblock %}

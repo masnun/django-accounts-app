@@ -1,0 +1,25 @@
+{% extends "master.html" %}
+
+{% block body %}
+
+    <div class="row">
+        <div class="col-md-offset-1 col-md-1">
+            <a class="btn btn-default" href="{% url 'accounts:transaction_list' %}?account={{ object.id }}">
+                <span class="glyphicon glyphicon-arrow-left">&nbsp;</span>Transactions</a>
+        </div>
+    </div>
+
+    <br/>
+    <br/>
+
+    <div class="row">
+        <div class="col-md-offset-1 col-md-5">
+            <form action="" method="post">{% csrf_token %}
+                <div class="alert alert-danger">Are you sure you want to delete "{{ object.notes }}"?</div>
+                <br/>
+                <input class="btn btn-danger" type="submit" value="Confirm"/>
+            </form>
+        </div>
+    </div>
+
+{% endblock %}
